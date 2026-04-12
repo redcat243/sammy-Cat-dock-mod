@@ -43,12 +43,21 @@ echo "Running Dock Modification Commands..."
 mkdir -p ~/livemmount
 mount_apfs -o nobrowse,rw /dev/disk1s5 ~/livemount                                
 # Triggers a GUI popup that pauses the script until "Continue" is clicked
-    read -p "Please disable all Mac system protections before proceeding. Once done, click Continue. to do it reboot your mac into recovery mode and click utilites -> terminal and run these 2 commands: csrutil disable && csrutil authenticated-root disable"
-# Triggers a GUI popup that pauses the script until "Continue" is clicked
-    read -p "manual steps : open finder (do you have the dock app from the repo?) go to your home folder,open the new macintosh hd folder go to the system folder then open the coreservices folder the command deleat the app dock then replace the dock with the dock from the repo"
+    read -p "Please disable all Mac system protections before proceeding. Once done, click Continue. to do it reboot your mac into recovery mode and click utilites -> terminal and run these 2 commands: csrutil disable and csrutil authenticated-root disable"
+# After the user clicks "Continue", the script will resume execution
+read -p "THIS WILL MODIFY SYSTEM FILES. DO YOU WANT TO PROCEED? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Proceeding with system modifications..."
+else
+    echo "Installation aborted by user."
+    exit 1
+fi
+cp ~/livemount/System/Library/Coreservices/Dock.app ~/
+rm -rf ~/livemount/System/Library/Coreservices/Dock.app
+cp ~/Desktop/Dock.app ~/livemount/System/Library/CoreServices/
 bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 
 
-echo "Installation Complete."
-echo "please restart your computer"
+echo "Installation Complete. rebooting now..."
+reboot
 exit 0
