@@ -3,4 +3,4 @@
 this is strictly for macos 12.7.6 also coretypes.bundle is included for fixing
 
 
-![alt text](png.png)
+![see preveiw](png.png)
