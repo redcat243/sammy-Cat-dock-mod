@@ -52,12 +52,21 @@ else
     echo "Installation aborted by user."
     exit 1
 fi
+read -p "if your Dock dissapears after the reboot, your origanal Dock is in your home folder, Or you can run the script again"
 cp ~/livemount/System/Library/Coreservices/Dock.app ~/
 rm -rf ~/livemount/System/Library/Coreservices/Dock.app
 cp ~/Desktop/Dock.app ~/livemount/System/Library/CoreServices/
+echo "now makeing the Dock Mod permanent"
 bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
-
-
+read -p "The system will now reboot to apply changes. Do you want to reboot now? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Rebooting now..."
+else
+    echo "Please remember to reboot your system as soon as possible to apply the changes."
+    exit 0
+fi
+echo "if you want to undo the dock mod, just run the script again and copy your original dock to your desktop and then run the script again"
+echo "if you want... you can install AquaLickX to get a more retro feel on your mac"
 echo "Installation Complete. rebooting now..."
 reboot
 exit 0
