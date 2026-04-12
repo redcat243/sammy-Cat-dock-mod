@@ -52,6 +52,20 @@ else
     echo "Installation aborted by user."
     exit 1
 fi
+read -p "ARE YOU SURE? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Proceeding with system modifications..."
+else
+    echo "Installation aborted by user."
+    exit 1
+fi
+read -p "ARE YOU SURE SURE? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Proceeding with system modifications..."
+else
+    echo "Installation aborted by user."
+    exit 1
+fi
 read -p "if your Dock dissapears after the reboot, your origanal Dock is in your home folder, Or you can run the script again"
 cp ~/livemount/System/Library/Coreservices/Dock.app ~/
 rm -rf ~/livemount/System/Library/Coreservices/Dock.app
