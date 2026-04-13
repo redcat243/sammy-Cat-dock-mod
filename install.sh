@@ -66,11 +66,32 @@ else
     echo "Installation aborted by user."
     exit 1
 fi
+read -p "Are you the admin? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Proceeding with system modifications..."
+else
+    echo "Installation aborted by user."
+    exit 1
+fi
+read -p "Are lying? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborting."
+    exit 1
+else
+    echo "Installation continuing..."
+fi
+read -p "Are lying lying? (y/n) " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborting."
+    exit 1
+else
+    echo "Installation continuing..."
+fi
 read -p "if your Dock dissapears after the reboot, your origanal Dock is in your home folder, Or you can run the script again"
 cp ~/livemount/System/Library/Coreservices/Dock.app ~/
 rm -rf ~/livemount/System/Library/Coreservices/Dock.app
 cp ~/Desktop/Dock.app ~/livemount/System/Library/CoreServices/
-echo "now makeing the Dock Mod permanent"
+echo "now making the Dock Mod permanent"
 bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 read -p "The system will now reboot to apply changes. Do you want to reboot now? (y/n) " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
