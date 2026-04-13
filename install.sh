@@ -40,7 +40,7 @@ echo "System protections updated."
 # --- 5. SPACE FOR DOCK MOD/OTHER COMMANDS ---
 echo "Running Dock Modification Commands..."
 # Insert your non-silicon native commands here
-mkdir -p ~/livemmount
+mkdir -p ~/livemount
 mount_apfs -o nobrowse,rw /dev/disk1s5 ~/livemount                                
 # Triggers a GUI popup that pauses the script until "Continue" is clicked
     read -p "Please disable all Mac system protections before proceeding. Once done, click Continue. to do it reboot your mac into recovery mode and click utilites -> terminal and run these 2 commands: csrutil disable and csrutil authenticated-root disable"
