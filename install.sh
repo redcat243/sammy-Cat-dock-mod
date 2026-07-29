@@ -201,8 +201,10 @@ else
     echo "Installation continuing..."
 fi
 read -p "if your Dock dissapears after the reboot, your origanal Dock is in your home folder, Or you can run the script again"
-cp ~/livemount/System/Library/Coreservices/Dock.app ~/
-rm -rf ~/livemount/System/Library/Coreservices/Dock.app
+if [ -d "~/Desktop/Dock.app" ]
+then
+cp ~/livemount/System/Library/CoreServices/Dock.app ~/
+rm -rf ~/livemount/System/Library/CoreServices/Dock.app
 cp ~/Desktop/Dock.app ~/livemount/System/Library/CoreServices/
 echo "now making the Dock Mod permanent"
 bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
@@ -218,3 +220,6 @@ echo "if you want... you can install AquaLickX to get a more retro feel on your 
 echo "Installation Complete. rebooting now..."
 reboot
 exit 0
+else
+echo "you do not have the Dock.app on your Desktop please put it on your Desktop before installing"
+fi
